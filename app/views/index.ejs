@@ -33,10 +33,10 @@
 					</div>
 				<% } %>
 
-				<form class="form-inline form-entrar" action="/entrar" method="POST">
+				<form class="form-inline form-entrar" action="/autenticar" method="POST">
 					<div class="form-group">				
-						<input type="text" name="usuario" id="usuario" placeholder="Usuário" class="form-control" autocomplete="off" />
-						<input type="password" name="senha" id="senha" placeholder="Senha" class="form-control" />
+						<input type="text" name="usuario" id="usuario" value="<%= formData.usuario %>" placeholder="Usuário" class="form-control" autocomplete="off" />
+						<input type="password" name="senha" id="senha" value="<%= formData.senha %>" placeholder="Senha" class="form-control" />
 						<button type="submit" class="btn btn-success">Entrar</button>
 						<button type="button" class="btn btn-info">Cadastro</button>
 					</div>

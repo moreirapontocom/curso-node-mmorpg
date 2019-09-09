@@ -24,20 +24,3 @@ module.exports.cadastrar = function(application, req, res) {
     res.send('Deu certo');
     // res.render('cadastro', { validacao: errors, formData: {} });
 }
-
-module.exports.entrar = function(application, req, res) {
-
-    var formData = req.body;
-
-    req.assert('usuario', 'Usuário é obrigatório').notEmpty();
-    req.assert('senha', 'Senha é obrigatório').notEmpty();
-
-    var errors = req.validationErrors();
-    if (errors.length) {
-        res.render('index', { validacao: errors });
-        return;
-    }
-
-    res.send('Deu certo');
-
-}

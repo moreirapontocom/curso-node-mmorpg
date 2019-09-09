@@ -7,3 +7,8 @@ module.exports.jogo = function(req, res) {
 
     res.render('jogo');
 }
+
+module.exports.sair = function(req, res) {
+    req.session.destroy();
+    res.render('index', { validacao: {}, formData: {} });
+}

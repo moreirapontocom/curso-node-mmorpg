@@ -4,6 +4,6 @@ module.exports = function(application) {
     });
 
     application.post('/cadastrar', function(req, res) {
-        application.controllers.cadastroController.cadastrar(req, res);
+        application.controllers.cadastroController.cadastrar(application, req, res);
     })
 }

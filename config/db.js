@@ -1,7 +1,6 @@
 var mongo = require('mongodb');
 
 var mongoConnection = function() {
-    console.log('Criou a conexão NECESSÁRIA com o banco');
 
     var db = new mongo.Db(
         'got',

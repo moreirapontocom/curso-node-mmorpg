@@ -40,11 +40,11 @@ JogoModel.prototype.acao = function(acao, res) {
     var date = new Date();
     var tempo = '';
 
-    switch (acao.acao) {
-        case 1: tempo = 1 * 60 * 6000;
-        case 2: tempo = 2 * 60 * 6000;
-        case 3: tempo = 5 * 60 * 6000;
-        case 4: tempo = 5 * 60 * 6000;
+    switch (parseInt(acao.acao)) {
+        case 1: tempo = 1 * 60 * 6000; break;
+        case 2: tempo = 2 * 60 * 6000; break;
+        case 3: tempo = 5 * 60 * 6000; break;
+        case 4: tempo = 5 * 60 * 6000; break;
     }
 
     acao.tempo_para_terminar = date.getTime() + tempo;
@@ -56,6 +56,20 @@ JogoModel.prototype.acao = function(acao, res) {
 
             res.redirect('jogo?erro_validacao=success');
             client.close();
+        });
+    });
+
+}
+
+JogoModel.prototype.getAcoes = function(usuario, res) {
+
+    this._connection.open(function(err, client) {
+        client.collection('acoes', function(err, collection) {
+            collection.find({ usuario: usuario }).toArray(function(err, result) {
+
+                client.close();
+                res.render('pergaminhos', { acoes: result });
+            });
         });
     });
 

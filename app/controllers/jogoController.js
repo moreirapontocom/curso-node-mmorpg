@@ -39,7 +39,12 @@ module.exports.pergaminhos = function(application, req, res) {
         return;
     }
 
-    res.render('pergaminhos', { validation: {} });
+    var connection = application.config.db;
+    var JogoModel = new application.models.JogoModel(connection);
+
+    JogoModel.getAcoes(req.session.usuario, res);
+
+    // res.render('pergaminhos', { validation: {} });
 }
 
 module.exports.ordenar_acao_suditos = function(application, req, res) {

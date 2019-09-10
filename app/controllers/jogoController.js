@@ -16,6 +16,14 @@ module.exports.jogo = function(application, req, res) {
     // res.render('jogo', { img_casa: req.session.casa });
 }
 
+module.exports.suditos = function(application, req, res) {
+    res.render('aldeoes');
+}
+
+module.exports.pergaminhos = function(application, req, res) {
+    res.render('pergaminhos');
+}
+
 module.exports.sair = function(req, res) {
     req.session.destroy();
     res.render('index', { validacao: {}, formData: {} });

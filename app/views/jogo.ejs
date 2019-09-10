@@ -53,8 +53,15 @@
 			function cronometro() {
 				$('.segundos').each(function() {
 					var tempo = $(this).html();
+					var segundos = parseInt(tempo) - 1;
+					var valor = 0;
 
-					$(this).html(parseInt(tempo) - 1);
+					if (segundos < 0)
+						valor = 0;
+					else
+						valor = segundos;
+
+					$(this).html(valor);
 				});
 
 				timerId = setTimeout(cronometro, 1000);

@@ -49,14 +49,35 @@ JogoModel.prototype.acao = function(acao, res) {
 
     acao.tempo_para_terminar = date.getTime() + tempo;
 
+    var moedas = null;
+
+    switch (parseInt(acao.acao)) {
+        // Aqui está valor negativo pois estou tirando moedas do cara
+        // Na query está sendo incrementado de um negativo, então faz a subtração
+        case 1: moedas = -2 * acao.quantidade; break
+        case 2: moedas = -3 * acao.quantidade; break
+        case 3: moedas = -1 * acao.quantidade; break
+        case 4: moedas = -1 * acao.quantidade; break
+    }
+
     this._connection.open(function(err, client) {
+
+        // Cria as ações
+
         client.collection('acoes', function(err, collection) {
-
             collection.insert(acao);
-
-            res.redirect('jogo?erro_validacao=success');
-            client.close();
         });
+
+        // Atualiza as moedas
+
+        client.collection('jogo', function(err, collection) {
+            // Terceiro parâmetro do update é opcional e default TRUE (atualizar múltiplos registros)
+            // O $inc (no lugar do $set) incrementa
+            collection.update({ usuario: acao.usuario }, { $inc: { moeda: moedas } });
+            client.close();
+            res.redirect('jogo?erro_validacao=success');
+        });
+
     });
 
 }

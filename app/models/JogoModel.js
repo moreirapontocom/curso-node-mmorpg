@@ -35,6 +35,32 @@ JogoModel.prototype.iniciaJogo = function(usuario, casa, res, erro_validacao) {
 
 }
 
+JogoModel.prototype.acao = function(acao, res) {
+
+    var date = new Date();
+    var tempo = '';
+
+    switch (acao.acao) {
+        case 1: tempo = 1 * 60 * 6000;
+        case 2: tempo = 2 * 60 * 6000;
+        case 3: tempo = 5 * 60 * 6000;
+        case 4: tempo = 5 * 60 * 6000;
+    }
+
+    acao.tempo_para_terminar = date.getTime() + tempo;
+
+    this._connection.open(function(err, client) {
+        client.collection('acoes', function(err, collection) {
+
+            collection.insert(acao);
+
+            res.redirect('jogo?erro_validacao=success');
+            client.close();
+        });
+    });
+
+}
+
 module.exports = function() {
     return JogoModel;
 }

@@ -16,6 +16,6 @@ module.exports = function(application) {
     });
 
     application.post('/ordenar_acao_suditos', function(req, res) {
-        application.controllers.jogoController.ordenar_acao_suditos(req, res);
+        application.controllers.jogoController.ordenar_acao_suditos(application, req, res);
     });
 }

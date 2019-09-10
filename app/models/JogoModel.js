@@ -63,9 +63,12 @@ JogoModel.prototype.acao = function(acao, res) {
 
 JogoModel.prototype.getAcoes = function(usuario, res) {
 
+    var date = new Date();
+    var momento_atual = date.getTime();
+
     this._connection.open(function(err, client) {
         client.collection('acoes', function(err, collection) {
-            collection.find({ usuario: usuario }).toArray(function(err, result) {
+            collection.find({ usuario: usuario, tempo_para_terminar: {$gt: momento_atual} }).toArray(function(err, result) {
 
                 client.close();
                 res.render('pergaminhos', { acoes: result });

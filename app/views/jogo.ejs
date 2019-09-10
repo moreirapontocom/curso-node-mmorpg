@@ -40,11 +40,25 @@
 						method: 'get',
 						success: function(data) {
 							$('#acoes').html(data);
+
+							clearTimeout(timerId);
+							cronometro();
 						}
 					});
 				});
 
 			});
+
+			var timerId = null;
+			function cronometro() {
+				$('.segundos').each(function() {
+					var tempo = $(this).html();
+
+					$(this).html(parseInt(tempo) - 1);
+				});
+
+				timerId = setTimeout(cronometro, 1000);
+			}
 		</script>
 
 	</head>

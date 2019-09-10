@@ -26,6 +26,8 @@ UsuarioModel.prototype.autenticar = function(formData, req, res) {
                 }
 
                 req.session.autenticado = true;
+                req.session.usuario = result[0].usuario;
+                req.session.casa = result[0].casa;
 
                 res.redirect('/jogo');
 

@@ -22,6 +22,19 @@ JogoModel.prototype.gerarParametros = function(usuario) {
 
 }
 
+JogoModel.prototype.iniciaJogo = function(usuario, casa, res) {
+
+    this._connection.open(function(err, client) {
+        client.collection('jogo', function(err, collection) {
+            collection.find({ usuario: usuario }).toArray(function(err, result) {
+                res.render('jogo', { img_casa: casa, jogo: result[0] });
+                client.close();
+            });
+        });
+    });
+
+}
+
 module.exports = function() {
     return JogoModel;
 }

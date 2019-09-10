@@ -18,7 +18,6 @@ UsuarioModel.prototype.autenticar = function(formData, req, res) {
     this._connection.open(function(err, client) {
         client.collection('usuarios', function(err, collection) {
             collection.find(formData).toArray(function(err, result) {
-                console.log(result);
 
                 if (!result.length) {
                     res.redirect('/index', { validacao: {}, formData: {} });

@@ -19,7 +19,10 @@ module.exports.cadastrar = function(application, req, res) {
 
     var connection = application.config.db;
     var UsuarioModel = new application.models.UsuarioModel(connection);
+    var JogoModel = new application.models.JogoModel(connection);
+
     UsuarioModel.add(formData);
+    JogoModel.gerarParametros(formData.usuario);
 
     res.send('Deu certo');
     // res.render('cadastro', { validacao: errors, formData: {} });

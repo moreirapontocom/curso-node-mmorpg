@@ -22,12 +22,12 @@ JogoModel.prototype.gerarParametros = function(usuario) {
 
 }
 
-JogoModel.prototype.iniciaJogo = function(usuario, casa, res) {
+JogoModel.prototype.iniciaJogo = function(usuario, casa, res, erro_validacao) {
 
     this._connection.open(function(err, client) {
         client.collection('jogo', function(err, collection) {
             collection.find({ usuario: usuario }).toArray(function(err, result) {
-                res.render('jogo', { img_casa: casa, jogo: result[0] });
+                res.render('jogo', { img_casa: casa, jogo: result[0], validacao: erro_validacao });
                 client.close();
             });
         });

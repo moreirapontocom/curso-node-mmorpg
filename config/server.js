@@ -42,5 +42,12 @@ consign()
 	.then('app/controllers')
 	.into(app);
 
+// Middleware pra tratar os status de resposta
+// Tem que ficar aqui no final pra não interromper o fluxo
+app.use(function(req, res, next) {
+	res.status(404).send('Ops. Página não encontrada');
+	next();
+});
+
 /* exportar o objeto app */
 module.exports = app;

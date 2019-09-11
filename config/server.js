@@ -46,8 +46,19 @@ consign()
 // Tem que ficar aqui no final pra não interromper o fluxo
 app.use(function(req, res, next) {
 	res.status(404).send('Ops. Página não encontrada');
+	// Também é possível usar o render() de uma view
+	// res.status(404).render('view-404.ejs');
 	next();
 });
+
+// Pra testar essa função, colocar uma víew inexistente no indexController.index(), por exemplo
+// Deixei comentado pra não atrapalhar no meu debug
+/*
+app.use(function(err, req, res, next) {
+	res.status(500).send('Ops. Deu um pau aqui');
+	next();
+});
+*/
 
 /* exportar o objeto app */
 module.exports = app;

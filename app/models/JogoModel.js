@@ -104,9 +104,10 @@ JogoModel.prototype.getAcoes = function(usuario, res) {
 JogoModel.prototype.revogarOrdem = function(id, res) {
     this._connection.open(function(err, client) {
         client.collection('acoes', function(err, collection) {
-            collection.remove({ _id: ObjectId(id) });
-            client.close();
-            res.redirect('/jogo?erro_validacao=success_revoke');
+            collection.remove({ _id: ObjectId(id) }, function(err, result) {
+                client.close();
+                res.redirect('/jogo?erro_validacao=success_revoke');
+            });
         });
     });
 }

@@ -24,6 +24,6 @@ module.exports.cadastrar = function(application, req, res) {
     UsuarioModel.add(formData);
     JogoModel.gerarParametros(formData.usuario);
 
-    res.send('Deu certo');
+    res.json({ body: 'Deu certo' });
     // res.render('cadastro', { validacao: errors, formData: {} });
 }

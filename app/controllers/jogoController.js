@@ -13,6 +13,9 @@ module.exports.jogo = function(application, req, res) {
     if (req.query.erro_validacao=='success')
         erro_validacao = 'success';
 
+    if (req.query.erro_validacao=='success_revoke')
+        erro_validacao = 'success_revoke';
+
     var usuario = req.session.usuario;
     var casa = req.session.casa;
 
@@ -66,6 +69,16 @@ module.exports.ordenar_acao_suditos = function(application, req, res) {
     JogoModel.acao(formData, res);
 
     // res.send('Tudo ok');
+}
+
+module.exports.revogarOrdem = function(application, req, res) {
+    
+    var connection = application.config.db;
+    var JogoModel = new application.models.JogoModel(connection);
+
+    var ordem_id = req.query.ordem;
+
+    JogoModel.revogarOrdem(ordem_id, res);
 }
 
 module.exports.sair = function(req, res) {

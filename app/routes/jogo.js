@@ -18,4 +18,9 @@ module.exports = function(application) {
     application.post('/ordenar_acao_suditos', function(req, res) {
         application.controllers.jogoController.ordenar_acao_suditos(application, req, res);
     });
+
+    application.get('/revogar_ordem', function(req, res) {
+        application.controllers.jogoController.revogarOrdem(application, req, res);
+    });
+
 }
